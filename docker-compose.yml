@@ -17,7 +17,6 @@ services:
   # php-fpm 
   php:
     build: ./php
-    command: bash -c 'usermod -o -u 1000 www-data; groupmod -o -g 1000 www-data; php-fpm'
     depends_on:
       - db
     ports:
@@ -26,9 +25,6 @@ services:
       - ./code:/var/www/html
     restart: always
     env_file: .env
-    # For site relation
-    # extra_hosts:
-    #   - teicon.lvh.me:$DOCKER_HOST_IP
   # mariaDB
   db:
     build: ./db
