@@ -17,6 +17,7 @@ services:
   # php-fpm 
   php:
     build: ./php
+    command: bash -c 'usermod -o -u 1000 www-data; groupmod -o -g 1000 www-data; php-fpm'
     depends_on:
       - db
     ports:
@@ -60,6 +61,11 @@ services:
       - web
     volumes:
       - ./code:/var/www/html
+  smtp:
+    image: schickling/mailcatcher
+    ports:
+        - "1080:1080"
+        - "1025:1025"
 
 volumes:
   cert:

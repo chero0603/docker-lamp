@@ -29,20 +29,19 @@ RUN docker-php-ext-install \
         pdo_mysql \
         mysqli
 
+RUN  a2enmod rewrite
+
+ARG DOCKER_UID=1000
+
+RUN usermod -o -u ${DOCKER_UID} www-data \
+  && groupmod -o -g ${DOCKER_UID} www-data
+
+COPY ./php.ini /usr/local/etc/php
+
 COPY ./msmtprc /etc/msmtprc
 RUN chown www-data:www-data /etc/msmtprc
 RUN chmod 600 /etc/msmtprc
 
-RUN  a2enmod rewrite
-
-COPY ./php.ini /usr/local/etc/php
-
 COPY ./xdebug.ini $PHP_INI_DIR/conf.d/
 
-ARG DOCKER_UID=1000
-ARG DOCKER_USER=docker
-ARG DOCKER_PASSWORD=docker
-RUN useradd -m --uid ${DOCKER_UID} --groups sudo ${DOCKER_USER} \
-  && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd
-
-USER ${DOCKER_USER}
+USER www-data
