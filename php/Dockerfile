@@ -26,6 +26,7 @@ RUN docker-php-ext-install \
         fileinfo \
         hash \
         xml \
+        pdo \
         pdo_mysql \
         mysqli
 
