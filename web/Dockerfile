@@ -23,6 +23,22 @@ RUN mkdir -p /etc/ssl/private && \
 	openssl req -new -newkey rsa:2048 -nodes -out /etc/ssl/private/server.csr -keyout /etc/ssl/private/server.key -subj "/C=/ST=/L=/O=/OU=/CN=*.lvh.me" && \
 	openssl x509 -days 3650 -req -signkey /etc/ssl/private/server.key -in /etc/ssl/private/server.csr -out /etc/ssl/private/server.crt
 
+# set locale
+RUN rm -f /etc/rpm/macros.image-language-conf && \
+    sed -i -e '/override_install_langs/s/$/,ja_JP.utf8/g' /etc/yum.conf && \
+    yum -y reinstall glibc-common && \
+    yum clean all
+RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
+ENV LANG="ja_JP.UTF-8" \
+    LANGUAGE="ja_JP:ja" \
+    LC_ALL="ja_JP.UTF-8"
+RUN echo 'ZONE="Asia/Tokyo"' > /etc/sysconfig/clock 
+RUN unlink /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+# editor install
+RUN yum -y clean all
+
 COPY docker.conf /etc/httpd/conf.d/docker.conf
 
 # dockre can not use systemd without permission, apahce is started with httpd
