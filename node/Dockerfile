@@ -1,6 +1,5 @@
 FROM node:latest
-RUN npm install -g gulp@3.9.1 gulp-phpunit config && \
-	npm install gulp@3.9.1 gulp-phpunit config && \
+RUN npm install -g gulp gulp-phpunit config && \
 	apt-get -y update && \
 	apt-get -y upgrade && \
 	apt-get -y install ca-certificates apt-transport-https && \
