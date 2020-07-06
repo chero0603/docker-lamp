@@ -43,6 +43,8 @@ services:
     env_file: .env
     ports:
       - 8080:80
+    volumes: 
+      - ./php/php.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
   # php Composer
   composer:
     image: composer
