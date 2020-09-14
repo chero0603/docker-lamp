@@ -7,15 +7,11 @@ It consists following.
 - apache2.4
 - mariadb
 - phpMyAdmin
-- composer
 - node js (Gulp)
 
 ## Installation
 
 ```bash
-# clone this repository
-https://github.com/temori1919/docker-lamp.git
-cd docker-lamp
 # run docker compose
 docker-compose up -d
 ```
@@ -25,10 +21,6 @@ docker-compose up -d
 Code dir is documentroot.
 Put your app under the documentroot.
 then you can access like below.
-
-```sh
- [your app dir].[public dir].lvh.me
-```
 
 You can access either http or https.
 
@@ -70,16 +62,6 @@ add it to the Dockerfile.
 See more infomation
 
 [PHP official repository](https://hub.docker.com/_/php/)
-
-## Composer
-
-You can run docker container composer.
-```bash
-# move your app dir
-cd docker-lamp/code/[yourapp]
-docker-compose run --rm -v $(pwd):/app composer install
-```
-
 
 If you need specific PHP extensions, 
 you can avoid them with the following options.

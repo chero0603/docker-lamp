@@ -2,10 +2,9 @@
 /db/logs/*
 !/db/logs/.gitkeep
 /code/*
-!/code/example
-!/code/gulpfile.js
-!/code/config
-/code/config/*
-!/code/config/default.json.example
+!/code/public
 /web/logs/*
-!/web/logs/.gitkeep
+!.gitkeep
+
+Thumbs.db
+desktop.ini
