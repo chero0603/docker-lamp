@@ -2,7 +2,7 @@
 /db/logs/*
 !/db/logs/.gitkeep
 /code/*
-!/code/public
+!/code/phpinfo
 /web/logs/*
 !.gitkeep
 
