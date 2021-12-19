@@ -45,17 +45,6 @@ services:
       - 8080:80
     volumes: 
       - ./php/php.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
-  # node js (include gulp)
-  node:
-    build: ./node
-    restart: always
-    tty: true
-    ports:
-      - '8081'
-    depends_on:
-      - web
-    volumes:
-      - ./code:/var/www/html
   smtp:
     image: schickling/mailcatcher
     ports:
